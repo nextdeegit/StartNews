@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<group android:checkableBehavior="single">
-    <item
-        android:icon="@drawable/ic_home_black_24dp"
-        android:tint="@color/button_grey"
-        android:title="One" />
-    <item
-        android:icon="@drawable/ic_favorite_black_24dp"
-        android:tint="@color/button_grey"
-        android:title="Two" />
-    <item
-        android:icon="@drawable/ic_bookmark_border_black_24dp"
-        android:tint="@color/button_grey"
-        android:title="Three" />
-</group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_technology"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/cat_tech"
+
+            android:checked="true"/>
+        <item
+            android:id="@+id/nav_sport"
+            android:icon="@drawable/ic_fiber_manual_record_black_24dp"
+            android:title="@string/cat_Sport" />
+        <item
+            android:id="@+id/nav_business"
+            android:icon="@drawable/ic_bookmark_border_black_24dp"
+            android:title="@string/cat_bus" />
+        <item
+            android:id="@+id/nav_local"
+            android:icon="@drawable/ic_aspect_ratio_black_24dp"
+            android:title="@string/cat_local" />
+    </group>
+
+
+
 </menu>
