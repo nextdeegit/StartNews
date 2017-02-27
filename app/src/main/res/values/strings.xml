@@ -11,4 +11,6 @@
     <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="offline_text" translatable="true">Please make sure you are Connected to a network</string>
     <string name="no_network_text_view">No Network to Fetch News</string>
+    <string name="widget_empty_list">Nothing in the list</string>
+    <string name="widget_title">Start News</string>
 </resources>
