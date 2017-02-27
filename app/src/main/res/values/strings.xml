@@ -13,4 +13,9 @@
     <string name="no_network_text_view">No Network to Fetch News</string>
     <string name="widget_empty_list">Nothing in the list</string>
     <string name="widget_title">Start News</string>
+    <string name="invite_menu_label">Invite</string>
+    <string name="invitation_message">Hello, please download this App and test</string>
+    <string name="invitation_cta">Call to action</string>
+    <string name="invitation_title">Start News Invite</string>
+
 </resources>

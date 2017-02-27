@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,9 +32,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hanson.startnews.net.RSSParser;
 import com.example.hanson.startnews.services.SyncUtils;
 import com.example.hanson.startnews.utils.Connection;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener,GoogleApiClient.OnConnectionFailedListener{
     private static final String TAG = "MainActivity";
     public Context nContext;
     private boolean mTwoPane;
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     boolean isConnected;
     private TextView noNetworkText;
     private ProgressDialog mProgress;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int REQUEST_INVITE = 1;
 
 
 
@@ -72,6 +80,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SyncUtils.CreateSyncAccount(this);
         mProgress = new ProgressDialog(this);
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .addApi(AppInvite.API)
+                .build();
+
 
         isConnected = Connection.isNetworkAvailable(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -97,6 +111,35 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+    private void sendInvitation() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                .setMessage(getString(R.string.invitation_message))
+                .setCallToActionText(getString(R.string.invitation_cta))
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: requestCode=" + requestCode +
+                ", resultCode=" + resultCode);
+
+        if (requestCode == REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                // Check how many invitations were sent.
+                String[] ids = AppInviteInvitation
+                        .getInvitationIds(resultCode, data);
+                Log.d(TAG, "Invitations sent: " + ids.length);
+            } else {
+                // Sending failed or it was canceled, show failure message to
+                // the user
+                Log.d(TAG, "Failed to send invitation.");
+            }
+        }
+    }
+
+
 
 
     @Override
@@ -115,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == R.id.invite_menu){
+
+            sendInvitation();
 
         }
         return super.onOptionsItemSelected(item);
@@ -204,6 +250,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(lm);
 
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
     @Override
