@@ -22,7 +22,7 @@ public class NewsDetailActivity extends AppCompatActivity {
     private WebView mWebView;
 
     private Context context;
-    private  String id;
+    private  long id;
     public String title;
     public String url;
     private ProgressDialog progressDialog;
@@ -39,7 +39,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         Bundle bundle = this.getIntent().getExtras();
-        id = bundle.getString("rowId");
+        id = bundle.getLong("rowId");
         getStaffDetail();
 
 

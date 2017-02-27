@@ -235,12 +235,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                     if(isConnected) {
 
-                        String rowId = mCursor.getString(MyLoader.Query.COLUMN_ID);
+
+
+                        long rowId = getItemId(vh.getAdapterPosition());
 
 
                         Intent feedDetail = new Intent(getApplicationContext(), NewsDetailActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("rowId", rowId);
+                        bundle.putLong("rowId", rowId);
                         feedDetail.putExtras(bundle);
                         startActivity(feedDetail);
                     }else {
@@ -248,11 +250,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         Connection.showToastForDuration(getApplicationContext(), getString(R.string.offline_text), 5000,
                                 Gravity.CENTER);
                     }
-
-
-
                 }
             });
+
 
 
             return vh;
