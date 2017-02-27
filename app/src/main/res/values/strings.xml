@@ -8,4 +8,6 @@
     <string name="cat_local">Local</string>
     <string name="cat_bus">Business</string>
     <string name="nav_header_text">Categories</string>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>
+    <string name="offline_text" translatable="true">Please make sure you are Connected to a network</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.hanson.startnews;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -230,6 +232,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if(isConnected) {
+
+                        String rowId = mCursor.getString(MyLoader.Query.COLUMN_ID);
+
+
+                        Intent feedDetail = new Intent(getApplicationContext(), NewsDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("rowId", rowId);
+                        feedDetail.putExtras(bundle);
+                        startActivity(feedDetail);
+                    }else {
+
+                        Connection.showToastForDuration(getApplicationContext(), getString(R.string.offline_text), 5000,
+                                Gravity.CENTER);
+                    }
+
 
 
                 }
