@@ -118,17 +118,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (id == R.id.nav_technology) {
             // Handle the camera action
-
+            RSSParser.link = "http://www.techrepublic.com/mediafed/articles/latest/";
+            loadNews();
 
         } else if (id == R.id.nav_sport) {
 
 
+            RSSParser.link = "http://api.foxsports.com/v1/rss?partnerKey=zBaFxRyGKCfxBagJG9b8pqLyndmvo7UU&tag=soccer";
+            loadNews();
         } else if (id == R.id.nav_business) {
 
 
+            RSSParser.link = "http://businessnews.com.ng/feed/";
+            loadNews();
 
         } else if (id == R.id.nav_local) {
 
+            RSSParser.link = "http://thenationonlineng.net/feed/";
+            loadNews();
 
 
 
