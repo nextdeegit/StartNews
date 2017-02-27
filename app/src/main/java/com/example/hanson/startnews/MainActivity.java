@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (isConnected) {
             noNetworkText.setVisibility(View.GONE);
-            mProgress.setMessage("Please Wait..." );
+            mProgress.setMessage(getString(R.string.progress_dialogue));
             mProgress.show();
             progressDelay(6000,mProgress);
             SyncUtils.TriggerRefresh();

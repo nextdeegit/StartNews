@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/layout"
@@ -22,7 +22,7 @@
             android:layout_width="130sp"
             android:layout_height="106sp"
             android:src="@mipmap/ic_launcher"
-            android:contentDescription="post Image" />
+            android:contentDescription="@string/post_image" />
     </LinearLayout>
 
     <RelativeLayout
@@ -46,7 +46,7 @@
             android:maxLines="2"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text="News Title"/>
+            tool:text="@string/post_title"/>
 
         <TextView
             android:id="@+id/description_view"
@@ -56,7 +56,7 @@
             android:layout_marginStart="16sp"
             android:maxLines="5"
             android:layout_below="@+id/title_view"
-            android:text="description"
+            android:text="@string/post_description"
             />
 
         <!-- Date-->
@@ -75,7 +75,7 @@
             android:layout_marginTop="21sp"
             android:maxLength="22"
             android:textSize="12sp"
-            android:text="wednesday, 15"/>
+            android:text="@string/post_date"/>
 
 
 

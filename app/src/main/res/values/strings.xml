@@ -17,5 +17,11 @@
     <string name="invitation_message">Hello, please download this App and test</string>
     <string name="invitation_cta">Call to action</string>
     <string name="invitation_title">Start News Invite</string>
+    <string name="progress_dialogue">Please Wait...</string>
+    <string name="webview_error">Can not Load Page</string>
+    <string name="post_image">Post Image</string>
+    <string name="post_title">News Titlt</string>
+    <string name="post_date">Wednesday, 15</string>
+    <string name="post_description">Description</string>
 
 </resources>

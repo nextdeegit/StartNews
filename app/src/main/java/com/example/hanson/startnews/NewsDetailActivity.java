@@ -56,7 +56,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
 
-                progressDialog.setMessage("Please Wait...");
+                progressDialog.setMessage(getString(R.string.progress_dialogue));
                 progressDialog.show();
 
             }
@@ -70,7 +70,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                Toast.makeText(context, "Cannot load page", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.webview_error), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         });
