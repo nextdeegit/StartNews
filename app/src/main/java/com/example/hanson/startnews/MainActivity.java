@@ -193,13 +193,41 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             loadNews();
 
 
-
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (drawer != null) {
+            //Checking for null will make sure that there is no null pointer exception in the x-large screens where there is no nav drawer layout.
+            //Add a similar null check for mDrawerLayout wherever you are using the mDrawerLayout variable.
+
+            // Setup ActionBar Icon.
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+            // ActionBarDrawerToggle ties together the proper interactions
+            // between the sliding drawer and the action bar app icon
+            ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                    this,
+                    drawer,
+                    toolbar,
+                    R.string.navigation_drawer_open,
+                    R.string.navigation_drawer_close) {
+
+                public void onDrawerClosed(View view) {
+                    super.onDrawerClosed(view);
+                }
+
+                public void onDrawerOpened(View drawerView) {
+
+                    super.onDrawerOpened(drawerView);
+                }
+            };
+
+            drawer.setDrawerListener(mDrawerToggle);
+        }
         return true;
+
     }
 
     @Override

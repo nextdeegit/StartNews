@@ -6,7 +6,7 @@ apply plugin: 'com.android.application'
             config {
                 keyAlias 'sloanes'
                 keyPassword 'sloanes'
-                storeFile file("$rootDir/startnews.keystore")
+                storeFile file("$rootDir/startnews.jks")
                 storePassword 'sloanes'
             }
         }
