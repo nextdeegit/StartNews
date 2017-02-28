@@ -32,9 +32,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hanson.startnews.net.RSSParser;
 import com.example.hanson.startnews.services.SyncUtils;
 import com.example.hanson.startnews.utils.Connection;
-import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     boolean isConnected;
     private TextView noNetworkText;
     private ProgressDialog mProgress;
-    private GoogleApiClient mGoogleApiClient;
     private static final int REQUEST_INVITE = 1;
 
 
@@ -80,13 +77,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SyncUtils.CreateSyncAccount(this);
         mProgress = new ProgressDialog(this);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .addApi(AppInvite.API)
-                .build();
-
-
         isConnected = Connection.isNetworkAvailable(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -104,10 +94,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if(drawer!=null) {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
